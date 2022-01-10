@@ -1,0 +1,76 @@
+body{
+
+      background-repeat: no-repeat;
+	background-size: cover;
+	min-height: 100vh;
+	margin: 0;
+      background: linear-gradient(120deg, #1b1580, rgba(108, 31, 115, 1), rgb(167, 7, 42));
+
+}
+
+#main{
+      height: 100vh;
+      overflow: auto;
+      overflow-x: hidden;
+}
+
+
+ 
+
+#header img{
+      width: 70%;
+}
+
+.mycard{
+padding: 1%;
+}
+
+.myRow{
+      padding: 2%;
+}
+
+.my-card-style{
+      background-color: #f03ea550;
+      border-radius: 2rem;
+      padding: 1%;
+}
+
+.card-image{
+      padding: 0.5rem;
+      border-radius: 2rem;
+
+}
+
+.card-token-id{
+      color: rgb(230, 237, 243);
+      font-weight: 600;
+}
+
+.card-price{
+      color: rgb(230, 237, 243);
+}
+
+
+.card-row{
+      display: flex;
+      flex-wrap: wrap;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      padding-bottom: 1rem;
+
+}
+
+.par{
+      margin: 3%;
+}
+
+.colec{
+      border-radius: 2rem;
+      /* border:rgba(240, 114, 141, 0.466) 2px solid; */
+      border:rgb(247, 58, 1) 3px solid;
+      /* box-shadow: 10px 10px 0px 0px salmon inset; */
+      box-shadow: 0 3px 10px rgb(247, 58, 1) ;
+
+      padding: 2%;
+      margin: 2%;
+}
