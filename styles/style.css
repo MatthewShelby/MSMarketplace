@@ -38,17 +38,10 @@ padding: 1%;
 .card-image{
       padding: 0.5rem;
       border-radius: 2rem;
-
+      width: 100%;
+     
 }
 
-.card-token-id{
-      color: rgb(230, 237, 243);
-      font-weight: 600;
-}
-
-.card-price{
-      color: rgb(230, 237, 243);
-}
 
 
 .card-row{
@@ -74,3 +67,5 @@ padding: 1%;
       padding: 2%;
       margin: 2%;
 }
+
+

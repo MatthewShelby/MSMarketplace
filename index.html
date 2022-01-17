@@ -35,155 +35,153 @@
 
             <br>
 
+            <div class="par" id="instruction">
+                  <div class="colec">
+                        <h4 class="titleText">How does it works:</h4>
+                        <p class="titleText">In order to use MoSs NFT platform, you need to be connected to the neetwork
+                              uing Metamask.</p>
+                        <p class="titleText">To install metamask, <a href="https://metamask.io/" target="_blank">click
+                                    here.</a></p>
+                        <p class="titleText">To connect your metamask to the chain, please fllow <a
+                                    href="https://medium.com/spartanprotocol/how-to-connect-metamask-to-bsc-testnet-7d89c111ab2"
+                                    target="_blank">this instruction.</a></p>
+
+                  </div>
+            </div>
+
+            <div class="par" id='all-nfts-bar'>
+                  <br>
+
+                  <div class="colec">
+                        <h4 class="titleText">All NFTs:</h4>
+                        <div class="row myRow " id="all-nfts-list">
+                        </div>
+                  </div>
+            </div>
 
 
-            <div class="par">
+            <div class="par" id='my-nfts-bar'>
+                  <br>
                   <div class="colec">
                         <h4 class="titleText">My Own Collection:</h4>
-                        <div class="row myRow " id="rep">
-
-                              <div class="col-6 col-sm-4 col-md-4 col-lg-3  col-xl-2 col-xl-2  mycard">
-                                    <div class="my-card-style">
-                                          <div w3-include-html="card.html"></div>
-                                    </div>
-                              </div>
+                        <div class="row myRow " id="my-nfts-list">
                         </div>
                   </div>
             </div>
-            <img id="bannerImg" class="card-image" src="" alt="NFT Not Found" style="  opacity: 0.5;">
 
-            <!--
-            <div class="par">
 
+            <div class="par" id='sell-nfts-bar'>
+                  <br>
                   <div class="colec">
-                        <h4 class="titleText">Most recent sorted to sell:</h4>
-                        <div class="row myRow " id="rep2">
-
-                              <div class="col-6 col-sm-4 col-md-4 col-lg-3  col-xl-2 col-xl-2  mycard">
-                                    <div class="my-card-style">
-                                          <div w3-include-html="card.html"></div>
-                                    </div>
-                              </div>
+                        <h4 class="titleText">NFTs listed for sell:</h4>
+                        <div class="row myRow " id="sell-nfts-list">
                         </div>
                   </div>
-
-
             </div>
-            <div class="par">
 
+
+            <div class="par" id='auction-nfts-bar'>
+                  <br>
                   <div class="colec">
-                        <h4 class="titleText">Most recent Auctions:</h4>
-                        <div class="row myRow " id="rep3">
-
-                              <div class="col-6 col-sm-4 col-md-4 col-lg-3  col-xl-2 col-xl-2  mycard">
-                                    <div class="my-card-style">
-                                          <div w3-include-html="card.html"></div>
-                                    </div>
-                              </div>
+                        <h4 class="titleText">Auctions:</h4>
+                        <div class="row myRow " id="auction-nfts-list">
                         </div>
                   </div>
-
-
             </div>
 
-            <div class="par">
-
-                  <div class="colec">
-                        <h4 class="titleText">Recently soled:</h4>
-                        <div class="row myRow " id="rep4">
-
-                              <div class="col-6 col-sm-4 col-md-4 col-lg-3  col-xl-2 col-xl-2  mycard">
-                                    <div class="my-card-style">
-                                          <div w3-include-html="card.html"></div>
-                                    </div>
-                              </div>
-                        </div>
-                  </div>
-
-
-            </div>
--->
+            <button onclick="resHide()">res hide</button>
       </div>
-      <button onclick="doIm()">Save</button>
-      <button onclick="retIm()">Load</button>
 
+
+
+      </div>
       <script src="./js/bootstrap.bundle.min.js"></script>
       <script src="./js/MyCustomJs/cookie.js"></script>
-      <script src="./js/MyCustomJs/storage.js"></script>
-      <script src="./js/MyCustomJs/ContractInteraction.js"></script>
-      <script src="./js/MyCustomJs/NFTreader.js"></script>
+      <script src="./js/Intract/consts.js"></script>
+      <script src="./js/Intract/toContract.js"></script>
+      <script src="./js/Intract/toPage.js"></script>
+
       <script src="./pakages/node_modules/ethers/dist/ethers.umd.min.js"></script>
 
       <script>
             includeHTML();
 
-            docCookies.setItem('test2', 'valuerr');
-            trySingIn();
-            setTimeout(() => {
-                  var nnn = getNFTuri().then(x => {
-                        console.info(x)
 
-                        getNFTData(x, 'bannerImg')
-                  });
-            }, 1000)
-
-            function doIm() {
-                  bannerImage = document.getElementById('bannerImg');
-                  imgData = getBase64Image(bannerImage);
-                  localStorage.setItem("imgData", imgData);
-            }
-            function retIm() {
-
-
-                  var dataImage = localStorage.getItem('imgData');
-                  console.log(dataImage);
-                  bannerImg = document.getElementById('bannerImg');
-                  bannerImg.src = "data:image/png;base64," + dataImage;
-            }
+            StartContract();
 
 
 
-            let rep = document.getElementById('rep').innerHTML;
+
+
+
+
+
+
+            /*function resHide() {
+                  var x = document.getElementById('my-nfts-bar');
+                  if (x.style.display === "none") {
+                        x.style.display = "block";
+                  } else {
+                        x.style.display = "none";
+                  }
+            }*/
+
+
+
+
+
+
+
+
+            //// =================   card repeat:
+            //// =================   card repeat:
+            //// =================   card repeat:
+            //// =================   card repeat:
+            let c1 = '<div class="col-6 col-sm-4 col-md-4 col-lg-3  col-xl-2 col-xl-2  mycard"><div class="my-card-style"> <img   class="card-image" src="';
+            let c11 = '" alt="NFT Not Found" style="  opacity: 1;"><div class="card-row d-flex justify-content-between"><span class="card-token-id">#'
+            let c2 = '</span><span class="card-price">';
+            let c3 = '</span></div></div></div>'
             var newR = '';
-            for (let i = 0; i < 12; i++) {
+            /*for (let i = 0; i < myOwnNFTs.length; i++) {
 
-                  newR += rep;
+                  newR += c1 + myOwnNFTs[i].image + c11 + myOwnNFTs[i].tokenId + c2 + c3;
                   console.log(i);
-            }
-            document.getElementById('rep').innerHTML = newR;
+            }*/
+            //console.log(newR)
+            //document.getElementById('rep').innerHTML = newR;
 
 
 
-
-            let rep2 = document.getElementById('rep2').innerHTML;
-            var newR2 = '';
-            for (let i = 0; i < 12; i++) {
-                  newR2 += rep2;
-                  console.log(i);
-            }
-            document.getElementById('rep2').innerHTML = newR2;
-
-
-
-
-            let rep3 = document.getElementById('rep3').innerHTML;
-            var newR3 = '';
-            for (let i = 0; i < 12; i++) {
-                  newR3 += rep3;
-                  console.log(i);
-            }
-            document.getElementById('rep3').innerHTML = newR3;
-
-
-
-
-            let rep4 = document.getElementById('rep4').innerHTML;
-            var newR4 = '';
-            for (let i = 0; i < 12; i++) {
-                  newR4 += rep4;
-                  console.log(i);
-            }
-            document.getElementById('rep4').innerHTML = newR4;
+            /*
+                        let rep2 = document.getElementById('rep2').innerHTML;
+                        var newR2 = '';
+                        for (let i = 0; i < 12; i++) {
+                              newR2 += rep2;
+                              console.log(i);
+                        }
+                        document.getElementById('rep2').innerHTML = newR2;
+            
+            
+            
+            
+                        let rep3 = document.getElementById('rep3').innerHTML;
+                        var newR3 = '';
+                        for (let i = 0; i < 12; i++) {
+                              newR3 += rep3;
+                              console.log(i);
+                        }
+                        document.getElementById('rep3').innerHTML = newR3;
+            
+            
+            
+            
+                        let rep4 = document.getElementById('rep4').innerHTML;
+                        var newR4 = '';
+                        for (let i = 0; i < 12; i++) {
+                              newR4 += rep4;
+                              console.log(i);
+                        }
+                        document.getElementById('rep4').innerHTML = newR4;*/
       </script>
 
 </body>

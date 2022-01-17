@@ -1,6 +1,6 @@
 //#region ============ HTML FILE INCLUDER
 function includeHTML() {
-      console.log('html inclue;');
+      console.log('html include;');
       var z, i, elmnt, file, xhttp;
       /* Loop through a collection of all HTML elements: */
       z = document.getElementsByTagName("*");

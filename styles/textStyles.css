@@ -6,4 +6,21 @@
 a{
       color: rgb(69, 79, 218);
       cursor: pointer;
-    }
+}
+
+
+.card-token-id{
+      /* color: rgb(230, 237, 243); */
+      color: white;
+      font-weight: 600;
+}
+
+.card-price{
+      /* color: rgb(230, 237, 243); */
+      color: white;
+}
+
+.card-price-unit{
+      color: white;
+      font-size: smaller;
+}
