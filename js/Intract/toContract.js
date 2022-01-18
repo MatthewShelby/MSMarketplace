@@ -28,7 +28,7 @@ async function StartContract() {
                   tryInitContract().then(step2 => {
                         if (step2) {
                               // step 3: load my nfts;
-                              GetMyNFTs();
+                              //GetMyNFTs();
 
                               // step 4: load All nfts;
                               GetAllNFTs();
@@ -36,7 +36,7 @@ async function StartContract() {
                               GetAllSells();
 
 
-                              GetAllAuctions();
+                              //GetAllAuctions();
 
                         }
                   })
@@ -112,7 +112,10 @@ async function GetMyNFTs() {
                   request.open('GET', element); // Open a new connection, using the GET request on the URL endpoint
                   request.send();
                   request.onload = async function () {
+                        console.log('---')
+                        console.log(this.response);
                         data = JSON.parse(this.response);
+
                         await setPageMyNFTs(new NFT(data.name, data.description, data.image));
                   }
             });
@@ -130,15 +133,25 @@ async function GetMyNFTs() {
 
 async function GetAllNFTs() {
       myContract.getAllNFTs().then(x => {
+            console.log(x)
             x.forEach(element => {
                   var data;
                   var request = new XMLHttpRequest(); // Create a request variable and assign a new XMLHttpRequest object to it.
-                  request.open('GET', element); // Open a new connection, using the GET request on the URL endpoint
-                  request.send();
-                  request.onload = async function () {
-                        data = JSON.parse(this.response);
-                        setPageAllNFTs(new NFT(data.name, data.description, data.image));
+
+                  try {
+                        request.open('GET', element); // Open a new connection, using the GET request on the URL endpoint
+                        request.send();
+
+                        request.onload = async function () {
+                              console.log('^^^')
+                              console.log(this.response);
+                              data = JSON.parse(this.response);
+                              setPageAllNFTs(new NFT(data.name, data.description, data.image));
+                        }
+                  } catch (error) {
+
                   }
+
             });
       })
 }
@@ -152,7 +165,12 @@ async function GetAllNFTs() {
 //#region         step 5: Get All SELLS
 
 async function GetAllSells() {
-      myContract.getAllSells().then(x => {
+      myContract.getAllSells().then(
+            function(result){
+                  console.log(result);
+              }
+            /*x => {
+            console.log(x);
             for (let i = 0; i < x.length; i++) {
                   var tokenId = _hexToInt(x[i].tokenId._hex);
                   var price = _hexToInt(x[i].price._hex);
@@ -161,7 +179,8 @@ async function GetAllSells() {
 
             }
 
-      })
+      }*/
+      )
 }
 
 function fetchSellData(rawSellTicket) {

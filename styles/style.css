@@ -68,4 +68,20 @@ padding: 1%;
       margin: 2%;
 }
 
+.buy-btn{
+      color: white;
+      background-color: rgb(235, 90, 37);
+      margin: 0.7rem;
+      height: 2.3rem;
+      width: 5rem ;
+      font-size: medium;
+      /* width: 10%; */
+      border-radius: 1rem;
+      border: rgb(168, 166, 166) 1px solid;
+      box-shadow: grey 10 10 ;
+      cursor: pointer;
+}
 
+.pointer{
+      cursor: pointer;
+}
