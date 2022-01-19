@@ -48,7 +48,11 @@ async function addNFTCardTo(nft, pageListElement, pageBarElement) {
       let c4 = '</p><p class="titleText">';
       let c5 = '</p></div></div></div>';
       var newR = document.getElementById(pageListElement).innerHTML;
-      newR += c1 + nft.image + c2 + c3 + nft.name + c4 + nft.description + c5;
+      var des = nft.description;
+      if (des.length>40) {
+            des = des.substring(0,40)+'....';
+      }
+      newR += c1 + nft.image + c2 + c3 + nft.name + c4 + des + c5;
       document.getElementById(pageListElement).innerHTML = newR;
       document.getElementById(pageBarElement).style.display = "block";
       hideInstruction();

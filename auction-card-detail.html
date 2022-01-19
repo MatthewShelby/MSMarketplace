@@ -35,19 +35,34 @@
 
             <div class="par" id="instruction">
                   <div class="colec">
-                        <div class="card-row  d-flex justify-content-between ">
-                              <h4 class="titleText">There is an Auction running for NFT #<span id="tokenId"></span>.</h4>
-                              <button class="buy-btn">Buy</button>
+                        <!-- <div class="card-row  d-flex justify-content-between "> -->
+                        <div class="  ">
+                              <h4 class="titleText">There is an Auction running for NFT #<span id="tokenId"></span>.
+                              </h4>
+
+
                         </div>
-                        <div class="card-row  d-flex justify-content-between ">
-                              <div class="timer titleText"> <span id="days">2 days </span> <span id="timeLeft">11:04:35</span> Left.  </div>
+                        <div class="card-row  d-flex justify-content-center ">
+                              <div class="timer titleText"> <span class="digital-time" id="timeLeft">--:--:--</span>
+                                    Left. </div>
                         </div>
-                        
+                        <br>
+                        <br>
+
+                        <div class="card-row  d-flex justify-content-start col-6">
+                              <b style="width: 100%; color: white;">Enter an amount to place a Bid:</b>
+                              <br>
+                              <input type="number" class="function-action-input" name="transfer-amount"
+                                    id="bid-amount" placeholder="1000">
+                              <button onclick="placeBid()" class="buy-btn">Bid</button>
+                        </div>
+
                         <p class="titleText">Name: <span id="name"></span></p>
                         <p class="titleText">Base Price: <span id="basePrice"></span><span class="card-price-unit">
                                     "MRY"</span></p>
                         <p class="titleText">Highest Bid: <span id="highestBid"></span><span class="card-price-unit">
                                     "MRY"</span></p>
+                        <br>
 
                         <div class="col-12 d-flex justify-content-center">
                               <img src="" alt="NFT image" id="image" class="col-6">
@@ -58,8 +73,9 @@
                         <br>
                         <p class="titleText">Description: <span id="description"></span></p>
                         <br>
-                        <p class="titleText">currentOwnre: <span id="currentOwnre"></span></p>
+                        <p class="titleText">Currnet Owner: <span id="currentOwnre"></span></p>
                         <br>
+
                         &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="index.html">Back</a>
                   </div>
             </div>
@@ -81,6 +97,12 @@
       <script>
             setAuctionData();
 
+
+            function placeBid(){
+                  var tokenId = 'tokenId';
+                  var bidAmount = document.getElementById('bid-amount').value;
+                  InitContractToBid(tokenId,bidAmount);
+            }
       </script>
 
 </body>

@@ -28,7 +28,7 @@ async function StartContract() {
                   tryInitContract().then(step2 => {
                         if (step2) {
                               // step 3: load my nfts;
-                              //GetMyNFTs();
+                              GetMyNFTs();
 
                               // step 4: load All nfts;
                               GetAllNFTs();
@@ -36,12 +36,200 @@ async function StartContract() {
                               GetAllSells();
 
 
-                              //GetAllAuctions();
+                              GetAllAuctions();
 
                         }
                   })
             }
       })
+}
+
+
+
+
+
+
+//#region   =====================   BUY   =====================
+
+async function InitContractToBuy(sellTokenId) {
+
+      console.log('Start Contract');
+      //hideLists();
+
+
+      // Step 1: get connect to metamask
+      checkForMetamask().then(step1 => {
+            if (step1) {
+                  // step 2: init contract
+                  tryInitContract().then(step2 => {
+                        if (step2) {
+
+                              var sellNFT;
+                              myContract.getAllSells().then(x => {
+                                    if (x.length > 0) {
+                                          //sellNFTs = [];
+                                          for (let i = 0; i < x.length; i++) {
+                                                var tokenId = _hexToInt(x[i].tokenId._hex);
+                                                var price = _hexToInt(x[i].price._hex);
+
+                                                sellNFT = new NFTRawSellTicket(tokenId, Math.floor(price));
+
+                                          }
+                                          var ask = window.confirm(' Are you sure you want to buy the NFT #' + sellNFT.tokenId + ' with the price of ' + sellNFT.price + ' "MRY"')
+                                          if (ask) {
+                                                myContract._buyNFTRequest(sellNFT.tokenId).then(res => {
+                                                      if (res) {
+                                                            window.alert('Buy request has been transact.')
+                                                      }
+                                                });
+                                          }
+                                    }
+                              }
+                              )
+
+                        }
+                  })
+            }
+      })
+}
+
+//#endregion
+
+
+
+
+//#region   =====================   BID   =====================
+
+async function InitContractToBid(sellTokenId, bidAmount) {
+
+      console.log('Start Contract');
+
+
+      checkForMetamask().then(step1 => {
+            if (step1) {
+                  tryInitContract().then(step2 => {
+                        if (step2) {
+                              myContract.getAllAuctions().then(x => {  // Should have chage to getAuctionById(tokenId)
+                                    if (x.length > 0) {
+                                          var auctionNFT;
+                                          for (let i = 0; i < x.length; i++) {
+                                                console.log(x[i]);
+                                                var tokenId = _hexToInt(x[i].tokenId._hex);
+                                                var basePrice = _hexToInt(x[i].basePrice._hex);
+                                                var auctionMaturity = _hexToInt(x[i].auctionMaturity._hex);
+                                                var highestBid = _hexToInt(x[i].highestBid._hex);
+                                                var currentOwner = x[i].currentOwner;
+
+                                                auctionNFT = new Auction(tokenId, basePrice, auctionMaturity, Math.floor(highestBid), currentOwner);
+
+                                          }
+
+                                          if (bidAmount <= auctionNFT.highestBid) {
+                                                window.alert('Your Bid amount must be more than current highest bid.');
+                                          } else {
+                                                if (bidAmount <= auctionNFT.basePrice) {
+                                                      window.alert('The bid amount must be more than base price.');
+                                                } else {
+
+
+                                                      var ask = window.confirm(' Are you sure you want to place a bid for the NFT #' + auctionNFT.tokenId +
+                                                            ' with the amount of ' + bidAmount + ' "MRY"')
+                                                      if (ask) {
+                                                            myContract.placeBid(auctionNFT.tokenId, bidAmount).then(res => {
+                                                                  if (res) {
+                                                                        window.alert('Buy request has been transact.')
+                                                                  } else {
+                                                                        window.alert('Bid failed.   error: ' + res);
+
+                                                                  }
+                                                            });
+                                                      }
+                                                }
+                                          }
+                                    }
+                              }
+                              )
+
+                        }
+                  })
+            }
+      })
+}
+
+//#endregion
+
+
+//#region   =====================   Fetch Auction   =====================
+
+async function fetchAuctionById(tokenId) {
+
+      console.log('fetch auction');
+
+
+      checkForMetamask().then(step1 => {
+            if (step1) {
+                  tryInitContract().then(step2 => {
+                        if (step2) {
+
+                              myContract.getAuctionbyId(tokenId).then(x => {  // Should have chage to getAuctionById(tokenId)
+                                    console.log(x);
+                                    var tokenId = _hexToInt(x.tokenId._hex);
+                                    var basePrice = _hexToInt(x.basePrice._hex);
+                                    var auctionMaturity = _hexToInt(x.auctionMaturity._hex);
+                                    var highestBid = _hexToInt(x.highestBid._hex);
+                                    var currentOwner = x.currentOwner;
+
+                                    //var auction = new Auction(tokenId, basePrice, auctionMaturity, Math.floor(highestBid), currentOwner);
+
+
+                                    myContract._uriOf(tokenId).then(x => {
+                                          var data;
+                                          var request = new XMLHttpRequest(); // Create a request variable and assign a new XMLHttpRequest object to it.
+                                          request.open('GET', x); // Open a new connection, using the GET request on the URL endpoint
+                                          request.send();
+                                          request.onload = async function () {
+                                                data = JSON.parse(this.response);
+                                                var auctionNFT = new NFTAuction(tokenId, basePrice, auctionMaturity, Math.floor(highestBid), currentOwner, data.name, data.description, data.image)
+                                                setAuctionPage(auctionNFT);
+
+                                                /*
+                                                                                                setPageAuctionNFTs(newNFTA);
+                                                                                                var now = new Date();
+                                                                                                var exp = new Date(now.setDate(now.getDate() + 18));
+                                                                                                docCookies.setItem('A_' + newNFTA.tokenId, JSON.stringify(newNFTA), exp);*/
+                                          }
+                                    })
+
+
+                              });
+                        }
+                  }
+                  )
+
+            }
+      });
+}
+
+
+
+//#endregion
+
+
+async function GetDoneSells(sellTokenId) {
+
+
+      var doneSells = myContract.getDoneSells().then(x => {
+            console.info(x);
+            for (let i = 0; i < x.length; i++) {
+
+                  var tokenId = _hexToInt(x[i].tokenId._hex);
+                  var price = _hexToInt(x[i].price._hex);
+                  var timestamp = _hexToInt(x[i].timeStamp._hex);
+                  console.log(i + ':  tokenId: ' + tokenId + '   price: ' + price + '   timestamp: ' + timestamp);
+            }
+
+      });
+
 }
 
 
@@ -112,8 +300,8 @@ async function GetMyNFTs() {
                   request.open('GET', element); // Open a new connection, using the GET request on the URL endpoint
                   request.send();
                   request.onload = async function () {
-                        console.log('---')
-                        console.log(this.response);
+                        //console.log('---')
+                        //console.log(this.response);
                         data = JSON.parse(this.response);
 
                         await setPageMyNFTs(new NFT(data.name, data.description, data.image));
@@ -133,7 +321,7 @@ async function GetMyNFTs() {
 
 async function GetAllNFTs() {
       myContract.getAllNFTs().then(x => {
-            console.log(x)
+            //console.log(x)
             x.forEach(element => {
                   var data;
                   var request = new XMLHttpRequest(); // Create a request variable and assign a new XMLHttpRequest object to it.
@@ -143,8 +331,8 @@ async function GetAllNFTs() {
                         request.send();
 
                         request.onload = async function () {
-                              console.log('^^^')
-                              console.log(this.response);
+                              //console.log('^^^')
+                              //console.log(this.response);
                               data = JSON.parse(this.response);
                               setPageAllNFTs(new NFT(data.name, data.description, data.image));
                         }
@@ -165,21 +353,18 @@ async function GetAllNFTs() {
 //#region         step 5: Get All SELLS
 
 async function GetAllSells() {
-      myContract.getAllSells().then(
-            function(result){
-                  console.log(result);
-              }
-            /*x => {
-            console.log(x);
-            for (let i = 0; i < x.length; i++) {
-                  var tokenId = _hexToInt(x[i].tokenId._hex);
-                  var price = _hexToInt(x[i].price._hex);
-                  var sell = new NFTRawSellTicket(tokenId, price);
-                  fetchSellData(sell);
 
+      myContract.getAllSells().then(x => {
+            if (x.length > 0) {
+                  for (let i = 0; i < x.length; i++) {
+                        var tokenId = _hexToInt(x[i].tokenId._hex);
+                        var price = _hexToInt(x[i].price._hex);
+                        var sell = new NFTRawSellTicket(tokenId, Math.floor(price));
+                        fetchSellData(sell);
+
+                  }
             }
-
-      }*/
+      }
       )
 }
 
@@ -204,7 +389,7 @@ function fetchSellData(rawSellTicket) {
 }
 //#endregion
 
-//#region         step 5: Get All AUCTIONS
+//#region         step 6: Get All AUCTIONS
 
 async function GetAllAuctions() {
       myContract.getAllAuctions().then(x => {
@@ -214,7 +399,7 @@ async function GetAllAuctions() {
                   var auctionMaturity = _hexToInt(x[i].auctionMaturity._hex);
                   var highestBid = _hexToInt(x[i].highestBid._hex);
                   var currentOwner = x[i].currentOwner;
-                  var auction = new Auction(tokenId, basePrice, auctionMaturity, highestBid, currentOwner);
+                  var auction = new Auction(tokenId, Math.floor(basePrice), auctionMaturity, Math.floor(highestBid), currentOwner);
                   fetchAuctionData(auction);
 
             }

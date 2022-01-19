@@ -51,10 +51,12 @@ class NFTAuction {
 
 //#endregion
 
-const contractAddress = "0x0803D5b0Abbd5be20d7391fD2081EdF198B4EEB8";
+const contractAddress = "0xdc1b5E31A342B28884e8709c324882C1740861A7";
 
 
 //#region  ABI
+
+
 const ABI =
       [
             {
@@ -208,8 +210,27 @@ const ABI =
                         }
                   ],
                   "name": "_buyNFTRequest",
-                  "outputs": [],
+                  "outputs": [
+                        {
+                              "internalType": "bool",
+                              "name": "",
+                              "type": "bool"
+                        }
+                  ],
                   "stateMutability": "nonpayable",
+                  "type": "function"
+            },
+            {
+                  "inputs": [],
+                  "name": "_collectIrrigations",
+                  "outputs": [
+                        {
+                              "internalType": "uint256",
+                              "name": "",
+                              "type": "uint256"
+                        }
+                  ],
+                  "stateMutability": "pure",
                   "type": "function"
             },
             {
@@ -468,11 +489,67 @@ const ABI =
                   "type": "function"
             },
             {
+                  "inputs": [
+                        {
+                              "internalType": "uint256",
+                              "name": "tokenId",
+                              "type": "uint256"
+                        }
+                  ],
+                  "name": "getAuctionbyId",
+                  "outputs": [
+                        {
+                              "components": [
+                                    {
+                                          "internalType": "uint256",
+                                          "name": "tokenId",
+                                          "type": "uint256"
+                                    },
+                                    {
+                                          "internalType": "uint256",
+                                          "name": "basePrice",
+                                          "type": "uint256"
+                                    },
+                                    {
+                                          "internalType": "uint256",
+                                          "name": "auctionMaturity",
+                                          "type": "uint256"
+                                    },
+                                    {
+                                          "internalType": "uint256",
+                                          "name": "highestBid",
+                                          "type": "uint256"
+                                    },
+                                    {
+                                          "internalType": "address",
+                                          "name": "currentOwner",
+                                          "type": "address"
+                                    }
+                              ],
+                              "internalType": "struct MorySwapContract.Auction",
+                              "name": "",
+                              "type": "tuple"
+                        }
+                  ],
+                  "stateMutability": "view",
+                  "type": "function"
+            },
+            {
                   "inputs": [],
                   "name": "getDoneSells",
                   "outputs": [
                         {
                               "components": [
+                                    {
+                                          "internalType": "address",
+                                          "name": "from",
+                                          "type": "address"
+                                    },
+                                    {
+                                          "internalType": "address",
+                                          "name": "to",
+                                          "type": "address"
+                                    },
                                     {
                                           "internalType": "uint256",
                                           "name": "tokenId",
@@ -516,6 +593,37 @@ const ABI =
                   "type": "function"
             },
             {
+                  "inputs": [
+                        {
+                              "internalType": "uint256",
+                              "name": "tokenId",
+                              "type": "uint256"
+                        }
+                  ],
+                  "name": "getSellById",
+                  "outputs": [
+                        {
+                              "components": [
+                                    {
+                                          "internalType": "uint256",
+                                          "name": "tokenId",
+                                          "type": "uint256"
+                                    },
+                                    {
+                                          "internalType": "uint256",
+                                          "name": "price",
+                                          "type": "uint256"
+                                    }
+                              ],
+                              "internalType": "struct MorySwapContract.SellTicket",
+                              "name": "",
+                              "type": "tuple"
+                        }
+                  ],
+                  "stateMutability": "view",
+                  "type": "function"
+            },
+            {
                   "inputs": [],
                   "name": "giveTime",
                   "outputs": [
@@ -547,7 +655,13 @@ const ABI =
                         }
                   ],
                   "name": "listAuction",
-                  "outputs": [],
+                  "outputs": [
+                        {
+                              "internalType": "bool",
+                              "name": "",
+                              "type": "bool"
+                        }
+                  ],
                   "stateMutability": "nonpayable",
                   "type": "function"
             },

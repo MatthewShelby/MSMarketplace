@@ -24,3 +24,9 @@ a{
       color: white;
       font-size: smaller;
 }
+
+.digital-time{
+      font-family: 'Times New Roman', Times, serif;
+      font-size: x-large;
+      font-weight: 600;
+}
