@@ -82,6 +82,10 @@ padding: 1%;
       box-shadow: grey 10 10 ;
       cursor: pointer;
 }
+.buy-btn:disabled{
+      background-color: rgb(190, 163, 153);
+      cursor: default;
+}
 
 .pointer{
       cursor: pointer;
@@ -96,4 +100,20 @@ padding: 1%;
       border-radius: 1rem;
       border: rgb(168, 166, 166) 1px solid;
       box-shadow: grey 10 10 ;
+}
+
+.loading-image{
+      width: 10%;
+}
+
+.my-actions{
+      border-radius: 2rem;
+      /* border:rgba(240, 114, 141, 0.466) 2px solid; */
+      /* border:rgb(247, 58, 1) 2px solid; */
+      border:rgba(1, 169, 247, 0.329) 2px solid;
+      /* box-shadow: 10px 10px 0px 0px salmon inset; */
+      box-shadow: 0 4px 10px rgba(1, 169, 247, 0.329) ;
+
+      padding: 2%;
+      margin: 2%;
 }

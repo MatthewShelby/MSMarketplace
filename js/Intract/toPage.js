@@ -24,7 +24,8 @@ function hideInstruction() {
 
 
 async function setPageMyNFTs(nft) {
-      await addNFTCardTo(nft, 'my-nfts-list', 'my-nfts-bar');
+      console.log('setPageMyNFTs(nft) :  '+nft.tokenId);
+      await addMyNFTCardTo(nft, 'my-nfts-list', 'my-nfts-bar');
 }
 
 async function setPageAllNFTs(nft) {
@@ -41,8 +42,26 @@ async function setPageAuctionNFTs(nft) {
 
 }
 
+async function addMyNFTCardTo(nft, pageListElement, pageBarElement) {
+      console.log('addMyNFTCardTo(nft):  '+nft.tokenId);
+      let c1 = '<div onclick="goToMyCard(' + nft.tokenId + ')" class="col-6 col-sm-4 col-md-4 col-lg-3  col-xl-2 col-xl-2  mycard pointer"><div class="my-card-style"> <img   class="card-image" src="';
+      let c2 = '" alt="NFT Not Found" style="  opacity: 1;"><div class="card-ro ">'
+      let c3 = '<p class="titleText">';
+      let c4 = '</p><p class="titleText">';
+      let c5 = '</p></div></div></div>';
+      var newR = document.getElementById(pageListElement).innerHTML;
+      var des = nft.description;
+      if (des.length>40) {
+            des = des.substring(0,40)+'....';
+      }
+      newR += c1 + nft.image + c2 + c3 + nft.name + c4 + des + c5;
+      document.getElementById(pageListElement).innerHTML = newR;
+      document.getElementById(pageBarElement).style.display = "block";
+      hideInstruction();
+
+}
 async function addNFTCardTo(nft, pageListElement, pageBarElement) {
-      let c1 = '<div class="col-6 col-sm-4 col-md-4 col-lg-3  col-xl-2 col-xl-2  mycard"><div class="my-card-style"> <img   class="card-image" src="';
+      let c1 = '<div   class="col-6 col-sm-4 col-md-4 col-lg-3  col-xl-2 col-xl-2  mycard "><div class="my-card-style"> <img   class="card-image" src="';
       let c2 = '" alt="NFT Not Found" style="  opacity: 1;"><div class="card-ro ">'
       let c3 = '<p class="titleText">';
       let c4 = '</p><p class="titleText">';
@@ -94,6 +113,15 @@ async function addAuctionNFTCardTo(nft, pageListElement, pageBarElement) {
       pageNFTs[nft.tokenId] = nft;
       hideInstruction();
 }
+
+/*
+function goToMyCard(tokenId) {
+      var now = new Date();
+      var exp = new Date(now.setDate(now.getDate() + 18));
+      docCookies.setItem('sell_detail', tokenId, exp);
+      window.location.href = ('my-card-detail.html')
+}*/
+
 
 
 function goToSellCard(tokenId) {

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>MS Marketplace</title>
+      <link rel="stylesheet" href="./styles/style.css">
+      <link rel="stylesheet" href="./styles/textStyles.css">
+      <link rel="stylesheet" href="./css/bootstrap.min.css">
+      <script type="text/javascript" src="./js/MyCustomJs/htmlInjector.js">      </script>
+      <link rel="icon" href="./favicon.ico">
+
+</head>
+
+<body>
+      <div id="main">
+
+            <div id="header">
+                  <img src="./Image/moso1.png" alt="MoSo Marketplace">
+                  <div class="titleText">
+                        <h2>&nbsp; &nbsp; &nbsp; NFT sell information: </h2>
+                  </div>
+            </div>
+
+            <br>
+
+            <div class="par" id="instruction">
+                  <div class="colec">
+                        <div class="card-row  d-flex justify-content-between ">
+                              <h4 class="titleText">My own NFT #<span id="tokenId"></span>.</h4>
+
+                        </div>
+                        <p class="titleText">Name: <span id="name"></span></p>
+                        <div class="col-12 d-flex justify-content-center">
+                              <img src="./Image/loading.svg" alt="NFT image" id="image" class="col-6">
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <p class="titleText">Description: <span id="description"></span></p>
+                        <br>
+                        <br>
+                        <div class="my-actions">
+
+                              <div class="card-row  d-flex justify-content-start col-6">
+                                    <b style="width: 100%; color: white;">List a sell offer for the NFT:</b>
+                                    <br>
+                                    <b style="width: 100%; color: white;"> Price: <input type="number"
+                                                class="function-action-input" id="sell-price" placeholder="1000">
+                                          <button onclick="SellMyNFT()" id="sell-btn" class="buy-btn">Sell</button></b>
+                                    <br>
+                                    <div id="is-for-sell-comment" style=" display: none;">
+                                          <b id="" style="width: 100%; color: white;">
+                                                The NFT is already listed to sell for
+                                                <span id="show-sell-price" style="color: rgb(235, 90, 37);;"></span>
+                                                "MRY"</b>
+                                          <button onclick="CancelSellMyNFT()" id="cancel-sell-btn" class="buy-btn"
+                                                style="width: auto; display: none;">&nbsp; &nbsp; &nbsp; Cancel Sell
+                                                &nbsp;
+                                                &nbsp; &nbsp; </button>
+
+                                    </div>
+                              </div>
+                              <br>
+                              <br>
+                              <div class="card-row  d-flex justify-content-start col-6">
+                                    <b style="width: 100%; color: white;">List an auction for the NFT:</b>
+                                    <br>
+                                    <b style="width: 100%; color: white;">
+                                          Base Price: &nbsp; &nbsp; &nbsp; <input type="number" class="function-action-input" id="base-price"
+                                                placeholder="1000"></b>
+
+                                    <b style="width: 100%; color: white;">
+                                          Duraction (1-8 days) :&nbsp; &nbsp; &nbsp; <input type="number" class="function-action-input"
+                                                id="duration" placeholder="5" min="1" max="8"></b>
+                                    <button onclick="StartAuction()" id="sell-btn" class="buy-btn" style="width: auto;">
+                                          &nbsp; &nbsp; &nbsp;  Start Auction &nbsp; &nbsp; &nbsp; </button>
+                                    <br>
+                                    <!-- <div id="is-for-sell-comment" style=" display: none;">
+                                                <b id="" style="width: 100%; color: white;">
+                                                      The NFT is already on auction
+                                                      <span id="show-sell-price"
+                                                            style="color: rgb(235, 90, 37);;"></span> "MRY"</b>
+                                                <button onclick="CancelSellMyNFT()" id="cancel-sell-btn" class="buy-btn"
+                                                      style="width: auto; display: none;">&nbsp; &nbsp; &nbsp; Cancel
+                                                      Sell &nbsp;
+                                                      &nbsp; &nbsp; </button>
+
+                                          </div> -->
+                              </div>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+
+                        <br>
+                        <br>
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <a href="index.html">Back</a>
+                  </div>
+            </div>
+
+      </div>
+
+
+
+      </div>
+      <script src="./js/bootstrap.bundle.min.js"></script>
+      <script src="./js/MyCustomJs/cookie.js"></script>
+      <script src="./js/Intract/consts.js"></script>
+      <script src="./js/Intract/toContract.js"></script>
+      <script src="./js/Intract/toPage.js"></script>
+      <script src="./js/Intract/onCard.js"></script>
+
+      <script src="./pakages/node_modules/ethers/dist/ethers.umd.min.js"></script>
+
+      <script>
+
+            setMyNFTData();
+
+      </script>
+
+</body>

@@ -7,6 +7,27 @@ function buy() {
 
 
 
+function StartAuction() {
+      var basePrice = document.getElementById('base-price').value;
+      var duration = document.getElementById('duration').value;
+      InitContractToStartAuction(tokenID, basePrice,duration);
+}
+
+
+function Redeem() {
+      InitContractToRedeem(tokenID);
+}
+
+
+function SellMyNFT() {
+      var sellPrice = document.getElementById('sell-price').value;
+      InitContractToSell(tokenID, sellPrice);
+}
+
+function CancelSellMyNFT() {
+      InitContractToCancelSell(tokenID);
+}
+
 var tokenID;
 function setSellData() {
       var nftSell = JSON.parse(docCookies.getItem('sell_detail'));
@@ -17,6 +38,8 @@ function setSellData() {
       document.getElementById('name').innerHTML = nftSell.name;
       document.getElementById('image').src = nftSell.image;
 }
+
+
 
 var nftAuction;
 function setAuctionData() {
@@ -29,7 +52,8 @@ function setAuctionData() {
 
 function setAuctionPage(auc) {
       nftAuction = auc;
-      console.log('x.currentOwner:  '+nftAuction.currentOwner)
+      console.log('x.currentOwner:  ' + nftAuction.currentOwner)
+      tokenID = nftAuction.tokenId;
 
       document.getElementById('basePrice').innerHTML = nftAuction.basePrice;
       document.getElementById('description').innerHTML = nftAuction.description;
@@ -74,4 +98,32 @@ function setAuctionTimer(am) {
                   document.getElementById("timeLeft").innerHTML = "EXPIRED";
             }
       }, 1000);
+}
+
+
+function setMyNFTData() {
+
+      console.log('setMyNFTData call');
+      var myNFTTokenId = JSON.parse(docCookies.getItem('my_detail_tokenId'));
+      fetchMyNFT(myNFTTokenId);
+
+
+}
+
+async function setMyData(myNFT) {
+      console.info(myNFT);
+      tokenID = myNFT.tokenId;
+      document.getElementById('tokenId').innerHTML = myNFT.tokenId;
+      //document.getElementById('price').innerHTML = myNFT.price;
+      document.getElementById('description').innerHTML = myNFT.description;
+      document.getElementById('name').innerHTML = myNFT.name;
+      document.getElementById('image').src = myNFT.image;
+      if (myNFT.isForSell) {
+            document.getElementById('sell-btn').disabled = true;
+            document.getElementById('is-for-sell-comment').style.display = "block";
+            document.getElementById('cancel-sell-btn').style.display = "block";
+            document.getElementById('show-sell-price').innerHTML = myNFT.price;
+
+
+      }
 }
