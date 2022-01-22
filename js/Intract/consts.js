@@ -56,7 +56,7 @@ class NFTAuction {
 
 //#endregion
 
-const contractAddress = "0xFcbcB6cB294DEfE6F5E19a4920134abC59AB6Af0";
+const contractAddress = "0x783fd7e04D2f755436030693c7239FBA0aEdaF6A";
 
 
 //#region  ABI
